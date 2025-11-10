@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dave Tech | Shopify & Dropshipping Expert</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+  body { background:#0a0a0a; color:#fff; scroll-behavior:smooth; line-height:1.6; }
+  a { text-decoration:none; color:inherit; }
+
+  /* --- Hero --- */
+  .hero { position: relative; display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; text-align:center; padding:0 20px; overflow:hidden; background: #0a0a0a; }
+  #particles-js { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; }
+  .hero-title, .hero-subtitle, .hero-buttons { position: relative; z-index:1; }
+  .hero-title { font-size:4rem; font-weight:700; margin-bottom:20px; }
+  .gradient-text { background:linear-gradient(90deg,#ff6f61,#1e90ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation: gradientAnim 5s ease infinite alternate; }
+  @keyframes gradientAnim { 0%{background-position:0%} 100%{background-position:100%} }
+  .hero-subtitle { font-size:1.5rem; margin-bottom:40px; }
+  .hero-buttons { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+  .btn { padding:14px 35px; border-radius:50px; font-weight:600; transition:0.3s; background:linear-gradient(90deg,#ff6f61,#1e90ff); color:#fff; position:relative; overflow:hidden; cursor:pointer; }
+  .btn:hover { transform:scale(1.05); box-shadow:0 0 20px rgba(255,111,97,0.6); }
+  .btn:after { content:""; position:absolute; width:100%; height:100%; top:0; left:-100%; background:rgba(255,255,255,0.2); transition:0.5s; }
+  .btn:hover:after { left:0; }
+  .btn-secondary { background:#fff; color:#1e90ff; }
+  .btn-secondary:hover { background:#1e90ff; color:#fff; }
+
+  /* --- Sections --- */
+  section { padding:80px 20px; text-align:center; opacity:0; transform:translateY(30px); transition:1s ease; }
+  section.reveal { opacity:1; transform:translateY(0); }
+  .section-title { font-size:2.8rem; margin-bottom:30px; color:#1e90ff; font-weight:700; cursor:pointer; }
+
+  /* --- About --- */
+  .about p { max-width:700px; margin:0 auto; font-size:1.2rem; }
+
+  /* --- Portfolio --- */
+  .portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
+  .card { background:#111; border-radius:15px; overflow:hidden; padding:0; transition:0.5s; cursor:pointer; }
+  .card img { width:100%; height:200px; object-fit:cover; }
+  .card-content { padding:20px; }
+  .card-content h3 { margin-bottom:10px; color:#1e90ff; font-size:1.5rem; }
+  .card-content p { font-size:1rem; color:#ccc; }
+  .card:hover { transform:translateY(-10px); box-shadow:0 15px 30px rgba(30,144,255,0.6); }
+
+  /* --- Modal --- */
+  #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); color:#fff; justify-content:center; align-items:center; z-index:1000; padding:20px; overflow-y:auto; }
+  .modal-content { background:#111; padding:30px; border-radius:15px; max-width:700px; width:100%; position:relative; text-align:left; }
+  .modal-content img { width:100%; border-radius:10px; margin-bottom:20px; }
+  #modal-close { position:absolute; top:15px; right:20px; cursor:pointer; font-size:1.5rem; }
+
+  /* --- Contact --- */
+  .contact-form { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:20px; }
+  .contact-form input, .contact-form textarea { padding:14px; border-radius:10px; border:none; outline:none; background:#222; color:#fff; transition:0.3s; }
+  .contact-form input:focus, .contact-form textarea:focus { box-shadow:0 0 10px #1e90ff; }
+  .contact-form button { width:100%; }
+  .success-msg { color:#1e90ff; font-weight:600; margin-top:10px; display:none; text-align:center; }
+
+  /* --- Footer --- */
+  footer { text-align:center; padding:30px 20px; background:#111; font-size:0.9rem; color:#aaa; }
+
+  /* --- AI Chat --- */
+  #ai-btn { position:fixed; bottom:20px; right:20px; background:#1e90ff; color:#fff; border:none; border-radius:50%; width:60px; height:60px; cursor:pointer; font-size:28px; display:flex; align-items:center; justify-content:center; z-index:2000; }
+  #ai-chat { position:fixed; bottom:90px; right:20px; width:320px; max-height:400px; background:#111; border-radius:15px; box-shadow:0 0 20px rgba(30,144,255,0.6); display:none; flex-direction:column; overflow:hidden; z-index:2000; }
+  #ai-chat-header { background:#1e90ff; padding:10px; text-align:center; font-weight:600; }
+  #ai-chat-messages { flex:1; padding:10px; overflow-y:auto; font-size:0.9rem; }
+  #ai-chat-input { display:flex; }
+  #ai-chat-input input { flex:1; padding:10px; border:none; outline:none; border-top:1px solid #1e90ff; background:#222; color:#fff; }
+  #ai-chat-input button { padding:0 15px; background:#ff6f61; border:none; cursor:pointer; color:#fff; font-weight:600; }
+  
+  @media(max-width:768px) {
+    .hero-title { font-size:3rem; }
+    .hero-subtitle { font-size:1.2rem; }
+    .portfolio-grid { gap:20px; }
+    #ai-chat { width:90%; right:5%; bottom:90px; max-height:350px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<header class="hero">
+  <div id="particles-js"></div>
+  <h1 class="hero-title">Dave <span class="gradient-text">Tech</span></h1>
+  <p class="hero-subtitle"><span id="typed"></span></p>
+  <div class="hero-buttons">
+    <a href="#portfolio" class="btn">View Work</a>
+    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+  </div>
+</header>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <h2 class="section-title">About Me</h2>
+  <p>Helping entrepreneurs launch high-converting <strong>Shopify stores</strong> and manage <strong>Dropshipping</strong> businesses seamlessly.</p>
+</section>
+
+<!-- Portfolio Section -->
+<section class="portfolio" id="portfolio">
+  <h2 class="section-title">What I Do</h2>
+  <div class="portfolio-grid">
+    <div class="card" data-title="Store Setup" data-content="<p>Step 1: Choose Shopify plan</p><p>Step 2: Add products</p><p>Step 3: Configure payment & shipping</p><p>Step 4: Launch store</p>">
+      <img src="https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg" alt="Shopify Store Setup">
+      <div class="card-content"><h3>Store Setup</h3><p>Complete Shopify store setup with optimized products and payment systems.</p></div>
+    </div>
+    <div class="card" data-title="Dropshipping Automation" data-content="<p>Step 1: Connect suppliers</p><p>Step 2: Import products</p><p>Step 3: Automate orders</p><p>Step 4: Track shipments</p>">
+      <img src="https://images.pexels.com/photos/3184295/pexels-photo-3184295.jpeg" alt="Dropshipping Automation">
+      <div class="card-content"><h3>Dropshipping Automation</h3><p>Automate product imports, orders, and fulfillment seamlessly.</p></div>
+    </div>
+    <div class="card" data-title="Marketing & SEO" data-content="<p>Step 1: Keyword research</p><p>Step 2: Optimize pages</p><p>Step 3: Run campaigns</p><p>Step 4: Monitor analytics</p>">
+      <img src="https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg" alt="Marketing & SEO">
+      <div class="card-content"><h3>Marketing & SEO</h3><p>Increase store visibility and drive sales through strategic SEO and campaigns.</p></div>
+    </div>
+    <div class="card" data-title="Custom Store Design" data-content="<p>Step 1: Wireframe layout</p><p>Step 2: Customize theme</p><p>Step 3: Adjust colors/fonts</p><p>Step 4: Test responsiveness</p>">
+      <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg" alt="Custom Store Design">
+      <div class="card-content"><h3>Custom Store Design</h3><p>Modern, responsive store designs that attract and convert customers.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="modal">
+  <div class="modal-content">
+    <span id="modal-close">&times;</span>
+    <img id="modal-img" src="" alt="">
+    <h3 id="modal-title"></h3>
+    <div id="modal-steps"></div>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <h2 class="section-title">Contact Me</h2>
+  <form id="contact-form" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit" class="btn">Send Message</button>
+    <p class="success-msg" id="success-msg">✔ We'll get back to you shortly!</p>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Dave Tech. Shopify & Dropshipping Expert. All rights reserved.</p>
+</footer>
+
+<!-- AI Chat Button -->
+<button id="ai-btn">&#128172;</button>
+<div id="ai-chat">
+  <div id="ai-chat-header">Chat with Dave AI</div>
+  <div id="ai-chat-messages"></div>
+  <div id="ai-chat-input">
+    <input type="text" id="ai-input" placeholder="Ask a question...">
+    <button id="ai-send">Send</button>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+emailjs.init("vnx6XODP4lOAkcaTV");
+
+// Typed.js
+new Typed('#typed', {
+  strings: ["Shopify Expert", "Dropshipping Specialist", "eCommerce Designer"],
+  typeSpeed: 100,
+  backSpeed: 50,
+  loop: true
+});
+
+// Particles.js
+particlesJS("particles-js", {
+  particles: { number:{value:60,density:{enable:true,value_area:800}}, color:{value:"#1e90ff"}, shape:{type:"circle"}, opacity:{value:0.5}, size:{value:3}, line_linked:{enable:true,distance:150,color:"#1e90ff",opacity:0.4,width:1}, move:{enable:true,speed:2} },
+  interactivity:{events:{onhover:{enable:true,mode:"repulse"},onclick:{enable:true,mode:"repulse"}},modes:{repulse:{distance:150,duration:0.6}}}
+});
+
+// Scroll reveal
+const sections=document.querySelectorAll("section");
+const revealSection=()=>{const triggerBottom=window.innerHeight/1.2; sections.forEach(section=>{const sectionTop=section.getBoundingClientRect().top;if(sectionTop<triggerBottom){section.classList.add("reveal");}})};
+window.addEventListener("scroll",revealSection); revealSection();
+
+// Contact form
+const form=document.getElementById("contact-form"); const successMsg=document.getElementById("success-msg");
+form.addEventListener("submit",function(e){e.preventDefault();emailjs.sendForm("service_k1el3yr","template_hbcu2r7",this).then(()=>{successMsg.style.display="block"; form.reset();},(err)=>{alert("Oops! Something went wrong. Please check your EmailJS setup."); console.error(err);});});
+
+// Modal
+const cards=document.querySelectorAll('.card');
+const modal=document.getElementById('modal');
+const modalTitle=document.getElementById('modal-title');
+const modalSteps=document.getElementById('modal-steps');
+const modalImg=document.getElementById('modal-img');
+const modalClose=document.getElementById('modal-close');
+cards.forEach(card=>{card.addEventListener('click',()=>{modalTitle.textContent=card.getAttribute('data-title'); modalImg.src=card.querySelector('img').src; modalSteps.innerHTML=card.getAttribute('data-content'); modal.style.display='flex';});});
+modalClose.addEventListener('click',()=>{modal.style.display='none';});
+window.addEventListener('click',e=>{if(e.target==modal) modal.style.display='none';});
+
+// AI Chat
+const aiBtn=document.getElementById('ai-btn');
+const aiChat=document.getElementById('ai-chat');
+const aiSend=document.getElementById('ai-send');
+const aiInput=document.getElementById('ai-input');
+const aiMessages=document.getElementById('ai-chat-messages');
+
+const faqAnswers = {
+  "what services do you offer": "I help with Shopify store setup, dropshipping automation, marketing & SEO, and custom store design.",
+  "how can i contact you": "You can contact me using the contact form on this page or via email.",
+  "what is your pricing": "Pricing depends on the service. Contact me and I will provide a quote.",
+  "do you offer support": "Yes! I provide ongoing support for all services."
+};
+
+aiBtn.addEventListener('click',()=>{aiChat.style.display = aiChat.style.display==='flex'?'none':'flex';});
+aiSend.addEventListener('click',()=>{let question=aiInput.value.trim(); if(question==='') return;
+  let userMsg=document.createElement('div'); userMsg.textContent='You: '+question; userMsg.style.margin='5px 0'; aiMessages.appendChild(userMsg);
+  let answer='Sorry, I don\'t know that yet.';
+  let key=question.toLowerCase();
+  for(let q in faqAnswers){if(key.includes(q)){answer=faqAnswers[q]; break;}}
+  let botMsg=document.createElement('div'); botMsg.textContent='Dave AI: '+answer; botMsg.style.margin='5px 0'; aiMessages.appendChild(botMsg);
+  aiMessages.scrollTop=aiMessages.scrollHeight; aiInput.value=''; 
+});
+aiInput.addEventListener('keypress',function(e){if(e.key==='Enter'){aiSend.click();}});
+</script>
+</body>
+</html>
